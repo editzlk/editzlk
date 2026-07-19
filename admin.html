@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>EDITZ LK | Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+
+    <!-- EDITZ LK browser, GitHub Pages and mobile icons -->
+    <link rel="icon" href="./favicon.ico?v=4" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=4">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=4">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=4">
+    <link rel="manifest" href="./site.webmanifest?v=4">
+    <meta name="theme-color" content="#00d9ff">
+    <meta name="msapplication-TileImage" content="./android-chrome-192x192.png?v=4">
+
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+
+  <main id="loginView" class="login-shell">
+    <section class="login-card">
+      <div class="admin-mark"><img src="profile.png" alt="EDITZ LK"><span>SECURE ADMIN</span></div>
+      <h1>Welcome Back</h1>
+      <p>Sign in with the authorized EDITZ LK administrator account.</p>
+      <form id="loginForm">
+        <label>Email<input id="loginEmail" type="email" autocomplete="username" required></label>
+        <label>Password<div class="password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" required><button id="togglePassword" type="button" aria-label="Show password"><i class="fa-solid fa-eye"></i></button></div></label>
+        <button class="primary-btn" type="submit"><span>Secure Login</span><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+      </form>
+      <p id="loginMessage" class="form-message"></p>
+      <a class="back-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
+    </section>
+  </main>
+
+  <div id="adminView" class="admin-app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><img src="profile.png" alt=""><div><strong>EDITZ <span>LK</span></strong><small>Admin Console</small></div></a>
+      <nav>
+        <button class="nav-btn active" data-panel="overview"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></button>
+        <button class="nav-btn" data-panel="downloads"><i class="fa-solid fa-download"></i><span>Download Files</span></button>
+        <button class="nav-btn" data-panel="uploads"><i class="fa-solid fa-cloud-arrow-up"></i><span>Client Uploads</span></button>
+        <button class="nav-btn" data-panel="orders"><i class="fa-solid fa-bag-shopping"></i><span>Orders & Payments</span></button>
+        <button class="nav-btn" data-panel="promos"><i class="fa-solid fa-ticket"></i><span>Promo Codes</span></button>
+      </nav>
+      <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar"><button id="sidebarToggle" class="icon-btn"><i class="fa-solid fa-bars"></i></button><div><p>CONTROL CENTER</p><h2 id="panelTitle">Overview</h2></div><div class="admin-chip"><span class="online-dot"></span><span id="adminEmail"></span></div></header>
+
+      <section id="overviewPanel" class="panel active">
+        <div class="hero-admin"><div><span class="eyebrow">EDITZ LK DASHBOARD</span><h1>Manage everything from one place.</h1><p>Add public downloads, inspect client uploads, and keep your workflow organized.</p></div><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div class="stats-grid">
+          <article><div class="stat-icon"><i class="fa-solid fa-file-arrow-down"></i></div><div><span>Published Downloads</span><strong id="downloadCount">0</strong></div></article>
+          <article><div class="stat-icon"><i class="fa-solid fa-cloud"></i></div><div><span>Client Uploads</span><strong id="uploadCount">0</strong></div></article>
+          <article><div class="stat-icon"><i class="fa-solid fa-hard-drive"></i></div><div><span>Uploaded Size</span><strong id="uploadSize">0 B</strong></div></article>
+          <article><div class="stat-icon"><i class="fa-solid fa-money-check-dollar"></i></div><div><span>Pending Orders</span><strong id="pendingOrderCount">0</strong></div></article>
+        </div>
+        <div class="quick-grid"><button data-go="downloads"><i class="fa-solid fa-plus"></i><span>Add a product</span></button><button data-go="orders"><i class="fa-solid fa-receipt"></i><span>Review payments</span></button><button data-go="promos"><i class="fa-solid fa-ticket"></i><span>Manage promo codes</span></button><a href="index.html#downloads" target="_blank"><i class="fa-solid fa-eye"></i><span>View public store</span></a></div>
+      </section>
+
+      <section id="downloadsPanel" class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">PUBLIC LIBRARY</span><h1>Download Files</h1><p>Create image-based download cards shown on your website.</p></div><button id="openDownloadModal" class="primary-btn"><i class="fa-solid fa-plus"></i><span>Add New File</span></button></div>
+        <div id="adminDownloads" class="admin-grid"></div>
+        <div id="adminDownloadsEmpty" class="empty-state"><i class="fa-solid fa-box-open"></i><h3>No downloads yet</h3><p>Add your first public download card.</p></div>
+      </section>
+
+      <section id="uploadsPanel" class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">PRIVATE INBOX</span><h1>Client Uploads</h1><p>Files uploaded from the website are available only to the administrator.</p></div><button id="refreshUploads" class="secondary-btn"><i class="fa-solid fa-rotate"></i> Refresh</button></div>
+        <div class="toolbar"><input id="uploadSearch" type="search" placeholder="Search file name or type..."><select id="uploadFilter"><option value="all">All files</option><option value="image">Images</option><option value="video">Videos</option><option value="other">Other</option></select></div>
+        <div id="clientUploads" class="upload-list"></div>
+        <div id="clientUploadsEmpty" class="empty-state"><i class="fa-solid fa-cloud-arrow-up"></i><h3>No client uploads</h3><p>New website uploads will appear here automatically.</p></div>
+      </section>
+      <section id="ordersPanel" class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">PAYMENT CENTER</span><h1>Orders & Payments</h1><p>Review bank slips, approve purchases, reject invalid payments, and see completed card orders.</p></div><button id="refreshOrders" class="secondary-btn"><i class="fa-solid fa-rotate"></i> Refresh</button></div>
+        <div class="toolbar"><input id="orderSearch" type="search" placeholder="Search buyer, email, order ID or item..."><select id="orderFilter"><option value="all">All orders</option><option value="pending">Pending</option><option value="paid">Paid / Approved</option><option value="rejected">Rejected</option></select></div>
+        <div id="ordersList" class="order-list"></div>
+        <div id="ordersEmpty" class="empty-state"><i class="fa-solid fa-receipt"></i><h3>No orders yet</h3><p>New bank-transfer and card-payment orders will appear here.</p></div>
+      </section>
+
+      <section id="promosPanel" class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">DISCOUNT ENGINE</span><h1>Promo Codes</h1><p>Create percentage or fixed-value discounts with expiry dates and usage limits.</p></div><button id="openPromoModal" class="primary-btn"><i class="fa-solid fa-plus"></i><span>Add Promo Code</span></button></div>
+        <div id="promoList" class="promo-grid"></div>
+        <div id="promoEmpty" class="empty-state"><i class="fa-solid fa-ticket"></i><h3>No promo codes</h3><p>Create your first discount code.</p></div>
+      </section>
+    </div>
+  </div>
+
+  <dialog id="downloadModal">
+    <form id="downloadForm" class="modal-card">
+      <div class="modal-head"><div><span class="eyebrow">NEW PUBLIC ITEM</span><h2 id="modalTitle">Add Download File</h2></div><button id="closeDownloadModal" type="button" class="icon-btn"><i class="fa-solid fa-xmark"></i></button></div>
+      <input id="editingId" type="hidden">
+      <label>Title<input id="downloadTitle" maxlength="80" required placeholder="Example: Cinematic LUT Pack"></label>
+      <label>Description<textarea id="downloadDescription" maxlength="240" rows="4" placeholder="A short description of the file..."></textarea></label>
+      <label>Secure download link<input id="downloadLink" type="url" required placeholder="https://drive.google.com/..."></label>
+      <div class="payment-fields">
+        <label>Access type<select id="downloadAccessType"><option value="free">Free download</option><option value="paid">Paid download</option></select></label>
+        <label>Regular price (LKR)<input id="downloadPrice" type="number" min="0" step="1" value="0" placeholder="2500"></label>
+        <label>Sale price (optional)<input id="downloadSalePrice" type="number" min="0" step="1" placeholder="1990"></label>
+      </div>
+      <p class="field-hint"><i class="fa-solid fa-shield-halved"></i> Paid download links are revealed only after a verified card payment or admin-approved bank transfer.</p>
+      <div class="image-choice"><label>Cover image URL<input id="downloadImageURL" type="url" placeholder="https://..."></label><span>OR</span><label class="file-picker"><input id="downloadImageFile" type="file" accept="image/*"><i class="fa-solid fa-image"></i><span>Upload cover image</span></label></div>
+      <label class="switch-row"><span><strong>Publish now</strong><small>Show this item on the website</small></span><input id="downloadPublished" type="checkbox" checked><i></i></label>
+      <div id="coverPreview" class="cover-preview"><i class="fa-solid fa-image"></i><span>Cover preview</span></div>
+      <div class="modal-actions"><button id="cancelDownload" type="button" class="secondary-btn">Cancel</button><button class="primary-btn" type="submit"><i class="fa-solid fa-floppy-disk"></i><span>Save Item</span></button></div>
+      <p id="downloadMessage" class="form-message"></p>
+    </form>
+  </dialog>
+
+
+  <dialog id="promoModal">
+    <form id="promoForm" class="modal-card compact-modal">
+      <div class="modal-head"><div><span class="eyebrow">DISCOUNT CODE</span><h2 id="promoModalTitle">Add Promo Code</h2></div><button id="closePromoModal" type="button" class="icon-btn"><i class="fa-solid fa-xmark"></i></button></div>
+      <input id="promoEditingId" type="hidden">
+      <label>Promo code<input id="promoCode" maxlength="24" required placeholder="EDITZ20"></label>
+      <div class="payment-fields"><label>Discount type<select id="promoType"><option value="percent">Percentage</option><option value="fixed">Fixed LKR amount</option></select></label><label>Discount value<input id="promoValue" type="number" min="1" required></label><label>Minimum order (LKR)<input id="promoMinimum" type="number" min="0" value="0"></label></div>
+      <div class="payment-fields"><label>Expiry date<input id="promoExpiry" type="datetime-local"></label><label>Usage limit<input id="promoLimit" type="number" min="0" value="0" placeholder="0 = unlimited"></label></div>
+      <label class="switch-row"><span><strong>Active</strong><small>Allow customers to use this code</small></span><input id="promoActive" type="checkbox" checked><i></i></label>
+      <div class="modal-actions"><button id="cancelPromo" type="button" class="secondary-btn">Cancel</button><button class="primary-btn" type="submit"><i class="fa-solid fa-floppy-disk"></i><span>Save Code</span></button></div>
+      <p id="promoMessage" class="form-message"></p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

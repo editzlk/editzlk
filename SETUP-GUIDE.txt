@@ -1,0 +1,46 @@
+EDITZ LK ADMIN + DOWNLOAD SYSTEM — FIREBASE SETUP
+=================================================
+
+1) FIREBASE AUTHENTICATION
+- Firebase Console > Authentication > Sign-in method
+- Enable Email/Password
+- Authentication > Users > Add user
+- Use this admin email: editzlk.www@gmail.com
+- Create a strong password
+
+2) FIRESTORE DATABASE
+- Firebase Console > Firestore Database > Create database
+- Open Rules and replace everything with the content of firestore.rules
+- Click Publish
+
+3) FIREBASE STORAGE
+- Firebase Console > Storage > Rules
+- Replace everything with the content of storage.rules
+- Click Publish
+
+4) REQUIRED FIRESTORE INDEX
+The website query may ask for an index for:
+- Collection: downloads
+- Fields: published (Ascending), createdAt (Descending)
+Firebase shows a direct “Create index” link in the browser console/error. Click it once and wait until Enabled.
+
+5) ADMIN PAGE
+- Open: your-domain.com/admin.html
+- Login with editzlk.www@gmail.com and the Firebase Authentication password.
+- Add download title, description, Drive/download link and cover image.
+
+6) IMPORTANT SECURITY
+- The authorized email is defined in firebase-config.js, firestore.rules and storage.rules.
+- When changing the admin email, change it in ALL THREE files and republish both rule files.
+- Never put an email password or Gmail App Password inside website files.
+
+7) LARGE FILES
+- Client files use Firebase resumable upload and upload sequentially for stability.
+- Actual maximum file size depends on Firebase Storage plan/quota, browser, internet connection and Firebase limits.
+- Keep the browser tab open while uploading.
+
+8) GITHUB PAGES
+Upload all files in this folder, including:
+admin.html, admin.css, admin.js, firebase-config.js, public-downloads.js,
+firestore.rules, storage.rules and the existing website assets.
+The .rules and SETUP-GUIDE files do not affect the public website.

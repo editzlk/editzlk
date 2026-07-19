@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Order Submitted | EDITZ LK</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"><link rel="icon" href="./favicon.ico?v=6" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=6"><link rel="apple-touch-icon" href="./apple-touch-icon.png?v=6"><meta name="theme-color" content="#00d9ff"></head>
+<body style="min-height:100vh;display:grid;place-items:center;background:#070707;color:white;padding:20px">
+<main class="checkout-card" style="width:min(620px,100%);text-align:center">
+<span class="section-kicker"><i class="fa-solid fa-envelope-circle-check"></i> PAYMENT REVIEW</span>
+<h1 style="margin:18px 0 10px">Payment submitted successfully</h1>
+<p style="color:#aaa;line-height:1.75">Your bank payment is waiting for admin verification. After the administrator clicks Approve & Email, EmailJS will send the download link directly to the email address used during checkout.</p>
+<div id="orderBox" style="margin:22px 0;padding:18px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.025)"></div>
+<p style="color:#777;font-size:14px">Also check Spam or Promotions. The administrator can resend the link from the Orders & Payments panel.</p>
+<a href="index.html#downloads" class="download-action" style="display:inline-flex;margin-top:18px">Back to Downloads <i class="fa-solid fa-arrow-left"></i></a>
+</main>
+<script>const q=new URLSearchParams(location.search),id=q.get('order_id')||'Not provided',email=q.get('email')||'your checkout email';document.getElementById('orderBox').innerHTML=`<p style="color:#888;margin:0 0 7px">ORDER ID</p><strong style="word-break:break-all">${id.replace(/[<>&]/g,'')}</strong><p style="color:#888;margin:15px 0 7px">DOWNLOAD EMAIL WILL BE SENT TO</p><strong>${email.replace(/[<>&]/g,'')}</strong>`;</script>
+</body></html>
